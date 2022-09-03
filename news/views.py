@@ -3,10 +3,11 @@ from django.shortcuts import render, redirect
 from django.urls import  reverse, reverse_lazy
 from django.core.paginator import Paginator
 from django.db.models import Avg, Q
-from django.views.generic import CreateView, DeleteView
+from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from news.models import  Book, Review
+from news.forms import BookForm
 from news.consts import ITEM_PER_PAGE
 import requests
 from pprint import pprint
@@ -104,21 +105,21 @@ def detail_book_view(request, book_title):
 
 
 
-class CreateBookView(CreateView, LoginRequiredMixin):
-    template_name = 'book/book_create.html'
-    model = Book
-    fields =  ('title', 'category')
+def Create_Book_View(request):
+    if request.method == 'POST':
+        obj = Book()
+        form = BookForm(request.POST, instance=obj)
+        if form.is_valid():
+            form.instance.user = request.user
+            form.save()
+            return redirect(to='index')
+        
+
+    context = {
+        'BookForm': BookForm(),
+   }
     
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-
-        return super().form_valid(form)
-
-    def get_success_url(self, **kwargs):
-        return reverse('index')
-   
-    
+    return render(request, 'book/book_create.html', context)
     
 
 

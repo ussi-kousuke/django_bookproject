@@ -13,7 +13,7 @@
         {% access_list page_obj forloop.counter0 as book_obj %}
             <h2 class="text-success">{{ book_obj.title }}</h2>
             <br>
-            <a href=""><img src="{{ book_obj.largeImageUrl }}" class="img-thumbnail" ></a>
+            <a href=""><img src="{{ book_obj.largeImageUrl }}" class="img-thumbnail"></a>
             <br>
             <br>
             <h6>著者</h6>
@@ -80,7 +80,4 @@
         <a href="{% url 'index' %}" class="btn btn-primary">一覧へ</a>
         <a href="{% url 'review' book_review_title=book_title %}" class="btn btn-primary">レビューする</a>
     </div>
-    {% for item in review_book_list %}
-        {{ item.title }}
-    {% endfor %}
 {% endblock content%}

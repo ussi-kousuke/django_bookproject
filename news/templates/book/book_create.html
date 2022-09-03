@@ -6,21 +6,9 @@
     <h1>書籍新規登録</h1>
     <form method='POST' action="{% url 'create-book' %}" enctype="multipart/form-data" class=" m-4 bg-light border-success rounded form-group">
         {% csrf_token %}
-            <label>
-                対象書籍 :
-            </label>
-            <p><input class="form-control" type="text" name='title' value=""></p>
-            <label>
-                カテゴリ :
-            </label>
-            <select name="category">
-                <option value="ビジネス">ビジネス</option>
-                <option value="科学・テクノロジー">科学・テクノロジー</option>
-                <option value="人文・思想">人文・思想</option>
-                <option value="コンピュータ・IT">コンピュータ・IT</option>
-            </select>
+            
+            {{ BookForm.as_p }}
             <p><button type="submit" class="btn btn-success mt-4">作成する</button></p>
-        
     </form>
 
 {% endblock content%}
