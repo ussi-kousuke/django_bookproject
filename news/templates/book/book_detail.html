@@ -42,7 +42,7 @@
             <br>
             <br>
         {% endfor %}
-        <h6>YouTube 書評動画</h6>
+        <h6>{{ book_title }} の要約動画</h6>
         <hr>
         {% for title, url in youtube_video_url_dict.items %}
                 <ui>
@@ -74,6 +74,7 @@
                             <p>{{ review.text }}</p>
                         </div>
                     </div>
+                    <hr>
                 {% endfor %}
             {% endif %}
         </div>

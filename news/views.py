@@ -2,7 +2,7 @@ import environ
 from django.shortcuts import render, redirect
 from django.urls import  reverse, reverse_lazy
 from django.core.paginator import Paginator
-from django.db.models import Avg, Q
+from django.db.models import Avg, Q,  Prefetch
 from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -76,25 +76,15 @@ def detail_book_view(request, book_title):
     book_information_list = detailbookview.get_book_detail_date_with_rakuten_API()
     youtube_video_url_dict = detailbookview.get_youtube_video_url()
     Google_search_result_date_url = detailbookview.get_Google_search_result_date_url()
-    # object_list = Book.objects.filter(title__icontains=book_title).prefetch_related('reviews')
-    # print(object_list)
-    # review_book_list = object_list.reviews.all()
+    review_book_list = detailbookview.get_review_book_date()
    
-    # print(review_book_list)
-    
-    
-   
-   
-    
-    
-    
-    
+
     context = {
         'page_obj': book_information_list,
         'book_title':book_title,
         'youtube_video_url_dict': youtube_video_url_dict,
         'Google_search_result_date_url': Google_search_result_date_url,
-        # 'review_book_list': review_book_list,
+        'review_book_list': review_book_list,
         
     }
     
@@ -440,8 +430,10 @@ class DetailBooKView(object):
         
     
     def get_review_book_date(self):
-        review_book_list = Book.objects.filter(book__title=self.book_title).review_set.all()
+        object_list = Book.objects.filter(title__icontains=self.book_title)
+        review_book_list = Review.objects.filter(book__in=object_list)
         return review_book_list
+        
         
         
 
