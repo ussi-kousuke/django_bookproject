@@ -1,4 +1,4 @@
-{% extends 'news/base.html' %}
+{% extends 'book/base.html' %}
 
 {% block title %}アカウント作成{% endblock %}
 {% block h1 %} アカウント作成{% endblock %}
@@ -13,6 +13,6 @@
     {% if form.errors %}
         <span class="mb-2 small text-danger d-block text-start">利用できないユーザIDやパスワードの可能性があります。入力内容を再度ご確認ください。</span>
     {% endif %}
-    <button type="submit" class="btn-btn-success m-2">アカウント作成</button>
+    <button type="submit" class="btn btn-success mt-4">アカウント作成</button>
 </form>
 {% endblock %}
