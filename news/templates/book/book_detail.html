@@ -18,23 +18,23 @@
             <br>
             <h6>著者</h6>
             <hr>
-            <p>{{ book_obj.author}}</p>
+            <p style="margin-left: 5px;">{{ book_obj.author}}</p>
             <br>
             <h6>価格</h6>
             <hr>
-            <p>￥{{ book_obj.itemPrice}}</p>
+            <p style="margin-left: 5px;">￥{{ book_obj.itemPrice}}</p>
             <br>
             <h6>内容</h6>
             <hr>
-            <p>{{ book_obj.itemCaption}}</p>
+            <p style="margin-left: 5px;">{{ book_obj.itemCaption}}</p>
             <br>
             <h6>出版社</h6>
             <hr>
-            <p>{{ book_obj.publisherName }}</p>
+            <p style="margin-left: 5px;">{{ book_obj.publisherName }}</p>
             <br>
             <h6>発売日</h6>
             <hr>
-            <p>{{ book_obj.salesDate }}</p>
+            <p style="margin-left:5px;">{{ book_obj.salesDate }}</p>
             <br>
             <h6>書籍購入</h6>
             <hr>
@@ -44,17 +44,21 @@
         {% endfor %}
         <h6>{{ book_title }} の要約動画</h6>
         <hr>
-        {% for title, url in youtube_video_url_dict.items %}
-                <ui>
-                    <p><a href="{{ url }}">{{ title }}</a></p>
-                </ui>
-        {% endfor %}
+        {% if not youtube_video_url_dict %}
+            <h6 style="color:gray; margin-left: 5px;">{{ book_title }}にあてはまる動画はありません。</h6>
+        {% else %}
+            {% for title, url in youtube_video_url_dict.items %}
+                    <ui>
+                        <p style="margin-left: 5px;"><a href="{{ url }}">{{ title }}</a></p>
+                    </ui>
+            {% endfor %}
+        {% endif %}
         <br>
         <h6>{{ book_title }}でweb検索</h6>
         <hr>
         {% for title, url in Google_search_result_date_url.items %}
                 <ui>
-                    <p><a href="{{ url }}">{{ title }}</a></p>
+                    <p style="margin-left: 5px;"><a href="{{ url }}">{{ title }}</a></p>
                 </ui>
         {% endfor %}
         <br>
@@ -62,7 +66,7 @@
         <hr>
         <div class="border p-4 mb-2">
             {% if not review_book_list %}
-                <h6>現在レビューはありません</h6>
+                <h6 style="color:gray">現在レビューはありません</h6>
             {% else %}
                 {% for review in review_book_list %}
                     <div>

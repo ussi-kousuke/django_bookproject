@@ -113,7 +113,7 @@ def Create_Book_View(request):
     
 
 
-class CreateReviewView(CreateView, LoginRequiredMixin):
+class CreateReviewView(LoginRequiredMixin, CreateView):
     template_name = 'book/review_form.html'
     model = Review
     fields = ('book', 'title', 'text', 'rate')
