@@ -1,16 +1,13 @@
 import environ
 from django.shortcuts import render, redirect
-from django.urls import  reverse, reverse_lazy
-from django.core.paginator import Paginator
-from django.db.models import Avg, Q,  Prefetch
+from django.urls import  reverse
+from django.db.models import Avg, Q
 from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from news.models import  Book, Review
 from news.forms import BookForm
-from news.consts import ITEM_PER_PAGE
 import requests
-from pprint import pprint
 from apiclient.discovery import build
 
 # Create your views here.
@@ -36,9 +33,7 @@ CUSTOM_SEARCH_ENGINE_ID = env('CUSTOM_SEARCH_ENGINE_ID', str)
 def index_view(request):
  
     object_list = Book.objects.order_by('-id')
-    # paginator = Paginator(object_list, ITEM_PER_PAGE)
-    # page_number = request.GET.get('page', 1)
-    # page_obj = paginator.page(page_number)
+   
     book_information_list = []
 
     for item in object_list:
@@ -173,9 +168,6 @@ def Search_Book(request):
 def Categorize_by_business(request):
 
     object_list = Book.objects.filter(category='business')
-    # paginator = Paginator(object_list, ITEM_PER_PAGE)
-    # page_number = request.GET.get('page', 1)
-    # page_obj = paginator.page(page_number)
 
     book_information_list = []
     
@@ -204,9 +196,7 @@ def Categorize_by_business(request):
 def Categorize_by_science_and_Technology(request):
     
     object_list = Book.objects.filter(category='science ・Technology')
-    # paginator = Paginator(object_list, ITEM_PER_PAGE)
-    # page_number = request.GET.get('page', 1)
-    # page_obj = paginator.page(page_number)
+   
     book_information_list = []
     
     for item in object_list:
@@ -236,9 +226,7 @@ def Categorize_by_science_and_Technology(request):
 def Categorize_by_Humanities_and_ideas(request):
     
     object_list = Book.objects.filter(category='Humanities・ideas')
-    # paginator = Paginator(object_list, ITEM_PER_PAGE)
-    # page_number = request.GET.get('page', 1)
-    # page_obj = paginator.page(page_number)
+    
     book_information_list = []
     
     for item in object_list:
@@ -267,10 +255,6 @@ def Categorize_by_Humanities_and_ideas(request):
 def Categorize_by_computer_and_IT(request):
     
     object_list = Book.objects.filter(category='computer・IT')
-    # paginator = Paginator(object_list, ITEM_PER_PAGE)
-    # page_number = request.GET.get('page', 1)
-    # page_obj = paginator.page(page_number)
-    book_information_list = []
     
     for item in object_list:
         paramas = {
@@ -301,9 +285,7 @@ def Categorize_by_computer_and_IT(request):
 def Categorize_by_assesment(request):
     
     object_list = Book.objects.annotate(avg_rating=Avg('review__rate')).order_by('-avg_rating')
-    # paginator = Paginator(object_list, ITEM_PER_PAGE)
-    # page_number = request.GET.get('page', 1)
-    # page_obj = paginator.page(page_number)
+ 
     book_information_list = []
         
     for item in object_list:
