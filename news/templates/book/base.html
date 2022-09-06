@@ -64,7 +64,7 @@
                     </li>
                   </ul>
                   <form class="d-flex" action="{% url 'search'%}" method="get">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword" value="{{ request.GET.keyword}}">
+                    <input class="form-control me-2" type="search" placeholder="書籍のタイトルを入力" aria-label="Search" name="keyword" value="{{ request.GET.keyword}}" required>
                     <button class="btn btn-outline-success" type="submit">Search</button>
                   </form>
                 </div>
