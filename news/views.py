@@ -91,13 +91,17 @@ def detail_book_view(request, book_title):
 
 
 def Create_Book_View(request):
-    if request.method == 'POST':
-        obj = Book()
-        form = BookForm(request.POST, instance=obj)
-        if form.is_valid():
-            form.instance.user = request.user
-            form.save()
-            return redirect(to='index')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            obj = Book()
+            form = BookForm(request.POST, instance=obj)
+            if form.is_valid():
+                form.instance.user = request.user
+                form.save()
+                return redirect(to='index')
+
+    else:
+        return redirect(to='accounts:login')
         
 
     context = {
@@ -257,7 +261,7 @@ def Categorize_by_computer_and_IT(request):
     object_list = Book.objects.filter(category='computer・IT')
     
     book_information_list = []
-    
+
     for item in object_list:
         paramas = {
         'applicationId': APP_ID,
