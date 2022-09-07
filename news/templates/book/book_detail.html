@@ -1,0 +1,88 @@
+{% extends 'book/base.html' %}
+{% load extra_tags %}
+{% load static %}
+
+
+{% block title %} {{ object.title }} {% endblock title %}
+{% block h1 %}書籍詳細{% endblock %}
+
+{% block content %}
+
+    <div class="p-4 m-4 bg-light border border-success rounded">
+        {% for item in page_obj %}
+        {% access_list page_obj forloop.counter0 as book_obj %}
+            <h2 class="text-success">{{ book_obj.title }}</h2>
+            <br>
+            <a href=""><img src="{{ book_obj.largeImageUrl }}" class="img-thumbnail"></a>
+            <br>
+            <br>
+            <h6>著者</h6>
+            <hr>
+            <p style="margin-left: 5px;">{{ book_obj.author}}</p>
+            <br>
+            <h6>価格</h6>
+            <hr>
+            <p style="margin-left: 5px;">￥{{ book_obj.itemPrice}}</p>
+            <br>
+            <h6>内容</h6>
+            <hr>
+            <p style="margin-left: 5px;">{{ book_obj.itemCaption}}</p>
+            <br>
+            <h6>出版社</h6>
+            <hr>
+            <p style="margin-left: 5px;">{{ book_obj.publisherName }}</p>
+            <br>
+            <h6>発売日</h6>
+            <hr>
+            <p style="margin-left:5px;">{{ book_obj.salesDate }}</p>
+            <br>
+            <h6>書籍購入</h6>
+            <hr>
+            <a href="{{ book_obj.itemUrl }}"><img src="{% static 'image/楽天.jpg' %}" style="width: 100px; height: 50px"></a>
+            <br>
+            <br>
+        {% endfor %}
+        <h6>{{ book_title }} の要約動画</h6>
+        <hr>
+        {% if not youtube_video_url_dict %}
+            <h6 style="color:gray; margin-left: 5px;">{{ book_title }}にあてはまる動画はありません。</h6>
+        {% else %}
+            {% for title, url in youtube_video_url_dict.items %}
+                    <ui>
+                        <p style="margin-left: 5px;"><a href="{{ url }}">{{ title }}</a></p>
+                    </ui>
+            {% endfor %}
+        {% endif %}
+        <br>
+        <h6>{{ book_title }}でweb検索</h6>
+        <hr>
+        {% for title, url in Google_search_result_date_url.items %}
+                <ui>
+                    <p style="margin-left: 5px;"><a href="{{ url }}">{{ title }}</a></p>
+                </ui>
+        {% endfor %}
+        <br>
+        <h6>すべてのレビュー</h6>
+        <hr>
+        <div class="border p-4 mb-2">
+            {% if not review_book_list %}
+                <h6 style="color:gray">現在レビューはありません</h6>
+            {% else %}
+                {% for review in review_book_list %}
+                    <div>
+                        <h3 class="h4">{{ review.title }}</h3>
+                        <div class="px-2">
+                            <span>投稿ユーザー: {{ review.user.username }}</span>
+                            <br>
+                            <h6>評価: {{ review.rate }}点</h6>
+                            <p>{{ review.text }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <a href="{% url 'index' %}" class="btn btn-primary">一覧へ</a>
+        <a href="{% url 'review' book_review_title=book_title %}" class="btn btn-primary">レビューする</a>
+    </div>
+{% endblock content%}

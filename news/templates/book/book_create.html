@@ -1,0 +1,15 @@
+{% extends 'book/base.html' %}
+
+{% block title %} 書籍作成 {% endblock title %}  
+
+{% block content %}
+    <h1>書籍新規登録</h1>
+    <form method='POST' action="{% url 'create-book' %}" enctype="multipart/form-data" class=" m-4 bg-light border-success rounded form-group">
+        {% csrf_token %}
+            
+            {{ BookForm.as_p }}
+            <p><button type="submit" class="btn btn-success mt-4">作成する</button></p>
+    </form>
+
+{% endblock content%}
+
