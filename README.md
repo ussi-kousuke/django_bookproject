@@ -3,21 +3,22 @@
 読みたい本や読んだ本を保存できる本棚アプリケーションです。
 
 
-# DEMO
+# URL  
 
-"hoge"の魅力が直感的に伝えわるデモ動画や図解を載せる
 
-# Features
 
-このアプリケーションは詳細画面をよりセールスポイントにしており、詳細画面には楽天ブックス書籍検索APIを使って、
+# Features  
 
-# Requirement
+このアプリケーションは詳細画面をよりセールスポイントにしており、詳細画面には楽天ブックス書籍検索API、youtube data api v3, Custom Search API を使って、該当する書籍に関する情報を
+多く収集することを可能にしました。また、詳細画面はさらなる機能追加
+
+# Requirement  
 
 このアプリケーションを動かすのに必要なライブラリなどはrequirements.textに記載されています。
 
 # Installation
 
-Requirementで列挙したライブラリなどのインストール方法を説明する
+requirement.textで列挙したライブラリなどのインストール方法
 
 ```bash
 pip install -r requirements.txt
@@ -41,13 +42,7 @@ python demo.py
 * 会員登録、ログインを行わないと書籍の新規登録、レビューはできないようになっています。
 
 
-# Author
 
-作成情報を列挙する
-
-* 作成者
-* 所属
-* E-mail
 
 # License
 ライセンスを明示する
