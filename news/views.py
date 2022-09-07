@@ -47,7 +47,7 @@ def index_view(request):
         response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
 
         for key in list(response):
-            if not key in ['author', 'itemCaption', 'title', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
+            if not key in ['title', 'largeImageUrl']:
                 del response[key]
         
 
@@ -156,7 +156,7 @@ def Search_Book(request):
         
             response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
             for key in list(response):
-                if not key in ['author', 'itemCaption', 'title', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
+                if not key in ['title','largeImageUrl']:
                     del response[key]
 
             book_information_list.append(response)
@@ -185,7 +185,7 @@ def Categorize_by_business(request):
     
         response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
         for key in list(response):
-                if not key in ['author', 'itemCaption', 'title', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
+                if not key in ['title', 'largeImageUrl']:
                     del response[key]
 
         book_information_list.append(response)
@@ -214,7 +214,7 @@ def Categorize_by_science_and_Technology(request):
         response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
 
         for key in list(response):
-                if not key in ['author', 'itemCaption', 'title', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
+                if not key in ['title', 'largeImageUrl']:
                     del response[key]
 
         book_information_list.append(response)
@@ -244,7 +244,7 @@ def Categorize_by_Humanities_and_ideas(request):
         response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
 
         for key in list(response):
-            if not key in ['author', 'itemCaption', 'title', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
+            if not key in ['title', 'largeImageUrl']:
                 del response[key]
        
 
@@ -273,7 +273,7 @@ def Categorize_by_computer_and_IT(request):
         response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
 
         for key in list(response):
-            if not key in ['author', 'itemCaption', 'title', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
+            if not key in ['title', 'largeImageUrl']:
                 del response[key]
         
 
@@ -304,7 +304,7 @@ def Categorize_by_assesment(request):
         
             response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
             for key in list(response):
-                if not key in ['author', 'itemCaption', 'title', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
+                if not key in ['title','largeImageUrl',]:
                     del response[key]
                 
             book_information_list.append(response)
