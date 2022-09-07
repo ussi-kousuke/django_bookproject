@@ -9,21 +9,18 @@
 
 # Features
 
-このアプリケーションは詳細画面をよりセールスポイントにしており
+このアプリケーションは詳細画面をよりセールスポイントにしており、詳細画面には楽天ブックス書籍検索APIを使って、
 
 # Requirement
 
-"hoge"を動かすのに必要なライブラリなどを列挙する
-
-* huga 3.5.2
-* hogehuga 1.0.2
+このアプリケーションを動かすのに必要なライブラリなどはrequirements.textに記載されています。
 
 # Installation
 
 Requirementで列挙したライブラリなどのインストール方法を説明する
 
 ```bash
-pip install huga_package
+pip install -r requirements.txt
 ```
 
 # Usage
@@ -38,7 +35,9 @@ python demo.py
 
 # Note
 
-注意点などがあれば書く
+書籍を登録する際、本のタイトルは誤字、脱字がないように注意してください。
+Amazon
+
 
 # Author
 
