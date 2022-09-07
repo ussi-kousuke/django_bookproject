@@ -382,7 +382,7 @@ class DetailBooKView(object):
 
     def get_Google_search_result_date_url(self):
         Google_search_result_date_url = {}
-        keyword = f'{self.book_title} 書評'  
+        keyword = f'{self.book_title} 要約'  
 
         search_book_review_date = build('customsearch',
                 'v1',
