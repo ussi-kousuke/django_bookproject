@@ -1,1 +1,3 @@
-# django_bookproject
+# django_bookproject  
+本棚アプリケーションです。
+
