@@ -12,7 +12,7 @@
 このアプリケーションは詳細画面をよりセールスポイントにしており、詳細画面には楽天ブックス書籍検索API、youtube data api v3、 Custom Search API を使って、該当する書籍に関する情報を
 多く収集することを可能にしました。また、詳細画面はさらなる機能追加も考えられるので、詳細画面の機能のコードはオブジェクト指向の考え方を取り入れ、保守性、再利用性がある設計にしました。
 
-<br>
+
 # Requirement  
 
 このアプリケーションを動かすのに必要なライブラリなどはrequirements.textに記載されています。
@@ -24,7 +24,7 @@ requirements.textで列挙したライブラリなどのインストール方法
 ```bash
 pip install -r requirements.txt
 ```
-<br>
+
 # Usage
 
 django_bookprojectの基本的な使い方を説明する
@@ -70,17 +70,17 @@ $ python manage.py shell
 #### GOOGLE_API_KEY、CUSTOM_SEARCH_ENGINE_IDを生成
 [Custom Search APIを使ってGoogle検索結果を取得する](https://qiita.com/zak_y/items/42ca0f1ea14f7046108c)
 
-<br>
+
 ### 必要なライブラリーをインストール
 ```bash
 $ pip install -r requirements.txt
 ```
-<br>
+
 ### 開発用サーバーの立ち上げ
 ```bash
 $ python3 manage.py runserver
 ```
-<br>
+
 # Note
 
 * 書籍を新規登録する際、本のタイトルは誤字、脱字がないように注意してください。
