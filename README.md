@@ -46,13 +46,13 @@ $ touch .env
 ```bash
 SECRET_KEY='*********'
 
-APP_ID=************
+APP_ID='************'
 
-YOUTUBE_DATE_API_ID=***************
+YOUTUBE_DATE_API_ID='***************'
 
-GOOGLE_API_KEY=*****************
+GOOGLE_API_KEY='*****************'
 
-CUSTOM_SEARCH_ENGINE_ID=**************
+CUSTOM_SEARCH_ENGINE_ID='**************'
 
 ```
 
