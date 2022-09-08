@@ -44,7 +44,7 @@ $ touch .env
 ```
 #### .envファイルの中身
 ```bash
-SECRET_KEY='*********'
+SECRET_KEY='django-insecure-*********'
 
 APP_ID='************'
 
