@@ -56,6 +56,15 @@ CUSTOM_SEARCH_ENGINE_ID='**************'
 
 ```
 #### SECRET_KEYを再生成
+```bash
+$ python manage.py shell
+```
+```bash
+>>> from django.core.management.utils import get_random_secret_key
+>>> get_random_secret_key()
+'xxx-xxxx'
+```
+
 
 ### 必要なライブラリーをインストール
 ```bash
