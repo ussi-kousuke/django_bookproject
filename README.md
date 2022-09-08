@@ -40,7 +40,7 @@ $ source [newenvname]/bin/activate
 ### .envファイルの作成  
 ```bash
 $ cd django_bookproject
-& touch .env
+$ touch .env
 ```
 
 # Note
