@@ -64,7 +64,7 @@ $ python manage.py shell
 >>> get_random_secret_key()
 'xxx-xxxx'
 ```
-#### APP_ID, YOUTUBE_DATE_API_IDを生成  
+#### APP_ID、YOUTUBE_DATE_API_IDを生成  
 ```bash
 [ドキュメント情報共有サービス NotePM](https://notepm.jp)
 ```
