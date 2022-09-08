@@ -43,6 +43,18 @@ $ cd django_bookproject
 $ touch .env
 ```
 #### .envファイルの中身
+```bash
+SECRET_KEY='*********'
+
+APP_ID=************
+
+YOUTUBE_DATE_API_ID=***************
+
+GOOGLE_API_KEY=*****************
+
+CUSTOM_SEARCH_ENGINE_ID=**************
+
+```
 
 ### 必要なライブラリーをインストール
 ```bash
