@@ -68,7 +68,7 @@ $ python manage.py shell
 ```bash
 [ドキュメント情報共有サービス NotePM](https://notepm.jp)
 ```
-#### GOOGLE_API_KEY, CUSTOM_SEARCH_ENGINE_IDを生成
+#### GOOGLE_API_KEY、CUSTOM_SEARCH_ENGINE_IDを生成
 ```bash
 [ドキュメント情報共有サービス NotePM](https://notepm.jp)
 ```
