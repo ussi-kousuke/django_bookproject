@@ -33,6 +33,11 @@ git clone https://github.com/ussi-kousuke/django_bookproject.git
 ```
 ### 仮想環境の作成
 
+```bash
+python3 -m venv [newenvname]
+source [newenvname]/bin/activate
+```
+
 # Note
 
 * 書籍を新規登録する際、本のタイトルは誤字、脱字がないように注意してください。
