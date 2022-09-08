@@ -71,12 +71,12 @@ $ python manage.py shell
 [Custom Search APIを使ってGoogle検索結果を取得する](https://qiita.com/zak_y/items/42ca0f1ea14f7046108c)
 
 
-# 必要なライブラリーをインストール
+## 必要なライブラリーをインストール
 ```bash
 $ pip install -r requirements.txt
 ```
 
-# 開発用サーバーの立ち上げ
+## 開発用サーバーの立ち上げ
 ```bash
 $ python3 manage.py runserver
 ```
