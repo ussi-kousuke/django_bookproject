@@ -64,6 +64,9 @@ $ python manage.py shell
 >>> get_random_secret_key()
 'xxx-xxxx'
 ```
+#### APP_ID, YOUTUBE_DATE_API_IDを生成  
+
+#### GOOGLE_API_KEY, CUSTOM_SEARCH_ENGINE_IDを生成
 
 
 ### 必要なライブラリーをインストール
