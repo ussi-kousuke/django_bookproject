@@ -55,6 +55,7 @@ GOOGLE_API_KEY='*****************'
 CUSTOM_SEARCH_ENGINE_ID='**************'
 
 ```
+#### SECRET_KEYを再生成
 
 ### 必要なライブラリーをインストール
 ```bash
