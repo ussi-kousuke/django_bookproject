@@ -65,13 +65,10 @@ $ python manage.py shell
 'xxx-xxxx'
 ```
 #### APP_ID、YOUTUBE_DATE_API_IDを生成  
-```bash
-[ドキュメント情報共有サービス NotePM](https://notepm.jp)
-```
+[Google](https://www.google.co.jp/)
 #### GOOGLE_API_KEY、CUSTOM_SEARCH_ENGINE_IDを生成
-```bash
 [Custom Search APIを使ってGoogle検索結果を取得する](https://qiita.com/zak_y/items/42ca0f1ea14f7046108c)
-```
+
 
 ### 必要なライブラリーをインストール
 ```bash
