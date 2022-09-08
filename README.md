@@ -37,6 +37,11 @@ git clone https://github.com/ussi-kousuke/django_bookproject.git
 $ python3 -m venv [newenvname]
 $ source [newenvname]/bin/activate
 ```
+### .envファイルの作成  
+```bash
+$ cd django_bookproject
+.envファイルを作成する。
+```
 
 # Note
 
