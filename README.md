@@ -71,6 +71,11 @@ $ python manage.py shell
 $ pip install -r requirements.txt
 ```
 
+### 開発用サーバーの立ち上げ
+```bash
+$ python3 manage.py runserver
+```
+
 # Note
 
 * 書籍を新規登録する際、本のタイトルは誤字、脱字がないように注意してください。
