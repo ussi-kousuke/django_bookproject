@@ -34,8 +34,8 @@ git clone https://github.com/ussi-kousuke/django_bookproject.git
 ### 仮想環境の作成
 
 ```bash
-python3 -m venv [newenvname]
-source [newenvname]/bin/activate
+$ python3 -m venv [newenvname]
+$ source [newenvname]/bin/activate
 ```
 
 # Note
