@@ -42,6 +42,10 @@ $ source [newenvname]/bin/activate
 $ cd django_bookproject
 $ touch .env
 ```
+### 必要なライブラリーをインストール
+```bash
+$ pip install -r requirements.txt
+```
 
 # Note
 
