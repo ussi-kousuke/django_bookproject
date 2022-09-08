@@ -65,7 +65,7 @@ $ python manage.py shell
 'xxx-xxxx'
 ```
 #### APP_ID、YOUTUBE_DATE_API_IDを生成  
-[Google](https://www.google.co.jp/)
+[YouTube Data API v3 を使って YouTube 動画を検索する](https://qiita.com/koki_develop/items/4cd7de3898dae2c33f20)
 #### GOOGLE_API_KEY、CUSTOM_SEARCH_ENGINE_IDを生成
 [Custom Search APIを使ってGoogle検索結果を取得する](https://qiita.com/zak_y/items/42ca0f1ea14f7046108c)
 
