@@ -6,6 +6,7 @@
 # URL  
 
 # problem to solve
+Amazonなどで書籍を購入する際、カスタマーレビューなどがすくなく
 
 # Features  
 
