@@ -90,3 +90,6 @@ virtualenv-clone==0.3.0
 wadllib==1.3.3
 zipp==1.0.0
 zope.interface==4.7.1
+
+
+# Installing collected packages: cryptography, dbus-python, distlib, dj-database-url, sqlparse, Django, django-cors-headers, django-environ, entrypoints, filelock, protobuf, googleapis-common-protos, pyasn1, rsa, pyasn1-modules, google-auth, urllib3, idna, requests, google-api-core, uritemplate, pyparsing, httplib2, google-auth-httplib2, google-api-python-client, hyperlink, zipp, importlib-metadata, incremental, MarkupSafe, Jinja2, jsonpointer, jsonpatch, pyrsistent, jsonschema, jeepney, SecretStorage, more-itertools, jaraco.classes, keyring, distro, oauthlib, lazr.uri, wadllib, lazr.restfulclient, pbr, testresources, launchpadlib, netifaces, ptyprocess, pexpect, Pillow, platformdirs, virtualenv, virtualenv-clone, pipenv

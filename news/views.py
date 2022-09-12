@@ -6,8 +6,10 @@ from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from news.models import  Book, Review
+from django.core.paginator import Paginator
 from news.forms import BookForm
 import requests
+from news.consts import ITEM_PER_PAGE
 from apiclient.discovery import build
 
 # Create your views here.
@@ -31,34 +33,17 @@ CUSTOM_SEARCH_ENGINE_ID = env('CUSTOM_SEARCH_ENGINE_ID', str)
 
 
 def index_view(request):
- 
-    object_list = Book.objects.order_by('-id')
-   
-    book_information_list = []
-
-    for item in object_list:
-        paramas = {
-        'applicationId': APP_ID,
-        'format': 'json',
-        'title': item.title,
-    }
-    
-    
-        response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
-
-        for key in list(response):
-            if not key in ['title', 'largeImageUrl']:
-                del response[key]
-        
-
-        book_information_list.append(response)
-
-        
+    indexview = IndexView()
+    book_list = indexview.get_book_top_page_date()
+    paginator = Paginator(book_list, ITEM_PER_PAGE)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     
     context = {
-        'page_obj': book_information_list,
+        'page_obj': page_obj,
     }
-
+    
+    
    
     return render(request, 'book/index.html', context)
     
@@ -68,7 +53,7 @@ def index_view(request):
 def detail_book_view(request, book_title):
 
     detailbookview = DetailBooKView(book_title)
-    book_information_list = detailbookview.get_book_detail_date_with_rakuten_API()
+    book_information_list = detailbookview.get_book_detail_date()
     youtube_video_url_dict = detailbookview.get_youtube_video_url()
     Google_search_result_date_url = detailbookview.get_Google_search_result_date_url()
     review_book_list = detailbookview.get_review_book_date()
@@ -84,8 +69,6 @@ def detail_book_view(request, book_title):
     }
     
     
-    
-
     return render(request, 'book/book_detail.html', context)
 
 
@@ -144,54 +127,33 @@ def Search_Book(request):
         messages.success(request, '{}の検索結果'.format(keyword))
     
     
-        book_information_list = []
-        
-        for item in object_list:
-            paramas = {
-            'applicationId': APP_ID,
-            'format': 'json',
-            'title': item.title,
-        }
-        
-        
-            response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
-            for key in list(response):
-                if not key in ['title','largeImageUrl']:
-                    del response[key]
-
-            book_information_list.append(response)
+    paginator = Paginator(object_list, ITEM_PER_PAGE)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
 
     context = {
-        'page_obj': book_information_list,
+        'page_obj': page_obj,
     }
 
 
     return render(request, 'book/book_search.html', context)
 
+def Classify_registerd_books_by_user(request):
+    # if request.user.is_authenticated:
+    #     user = request.user
+    pass
+        
     
 def Categorize_by_business(request):
 
     object_list = Book.objects.filter(category='business')
-
-    book_information_list = []
-    
-    for item in object_list:
-        paramas = {
-        'applicationId': APP_ID,
-        'format': 'json',
-        'title': item.title,
-    }
-    
-    
-        response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
-        for key in list(response):
-                if not key in ['title', 'largeImageUrl']:
-                    del response[key]
-
-        book_information_list.append(response)
+    paginator = Paginator(object_list, ITEM_PER_PAGE)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     
     context = {
-        'page_obj': book_information_list,
+        'page_obj': page_obj,
     }
     
     return render(request, 'book/categorize_by_category.html' ,context)
@@ -200,27 +162,13 @@ def Categorize_by_business(request):
 def Categorize_by_science_and_Technology(request):
     
     object_list = Book.objects.filter(category='science ・Technology')
-   
-    book_information_list = []
-    
-    for item in object_list:
-        paramas = {
-        'applicationId': APP_ID,
-        'format': 'json',
-        'title': item.title,
-    }
-    
-    
-        response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
+    paginator = Paginator(object_list, ITEM_PER_PAGE)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-        for key in list(response):
-                if not key in ['title', 'largeImageUrl']:
-                    del response[key]
-
-        book_information_list.append(response)
     
     context = {
-        'page_obj': book_information_list,
+        'page_obj': page_obj,
     }
     
     
@@ -229,29 +177,13 @@ def Categorize_by_science_and_Technology(request):
 
 def Categorize_by_Humanities_and_ideas(request):
     
-    object_list = Book.objects.filter(category='Humanities・ideas')
-    
-    book_information_list = []
-    
-    for item in object_list:
-        paramas = {
-        'applicationId': APP_ID,
-        'format': 'json',
-        'title': item.title,
-    }
-    
-    
-        response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
-
-        for key in list(response):
-            if not key in ['title', 'largeImageUrl']:
-                del response[key]
-       
-
-        book_information_list.append(response)
-    
+    object_list = Book.objects.filter(category='Humanities ・ ideas')
+    paginator = Paginator(object_list, ITEM_PER_PAGE)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+   
     context = {
-        'page_obj': book_information_list,
+        'page_obj': page_obj,
     }
     
     return render(request, 'book/categorize_by_category.html' ,context)
@@ -259,63 +191,60 @@ def Categorize_by_Humanities_and_ideas(request):
 def Categorize_by_computer_and_IT(request):
     
     object_list = Book.objects.filter(category='computer・IT')
-    
-    book_information_list = []
-
-    for item in object_list:
-        paramas = {
-        'applicationId': APP_ID,
-        'format': 'json',
-        'title': item.title,
-    }
-    
-    
-        response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
-
-        for key in list(response):
-            if not key in ['title', 'largeImageUrl']:
-                del response[key]
-        
-
-        book_information_list.append(response)
-    
+    paginator = Paginator(object_list, ITEM_PER_PAGE)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     context = {
-        'page_obj': book_information_list,
+        'page_obj': page_obj,
     }
    
     
     return render(request, 'book/categorize_by_category.html' ,context)
 
 
-def Categorize_by_assesment(request):
-    
-    object_list = Book.objects.annotate(avg_rating=Avg('review__rate')).order_by('-avg_rating')
- 
-    book_information_list = []
-        
-    for item in object_list:
+class IndexView(object):
+
+    def get_book_top_page_date(self):
+        object_list = Book.objects.filter(author__isnull=True)
+   
+        book_information_list = []
+        book_title = []
+        for item in object_list:
             paramas = {
             'applicationId': APP_ID,
             'format': 'json',
             'title': item.title,
-    }
-        
-        
+        }
+            book_title.append(item)
             response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
+
             for key in list(response):
-                if not key in ['title','largeImageUrl',]:
+                if not key in ['author', 'itemCaption', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
                     del response[key]
-                
+
+            
             book_information_list.append(response)
+        for index, book in enumerate(book_information_list):
+            obj, created = Book.objects.update_or_create(
+
+                title=book_title[index],
+                defaults={
+                    'author': book['author'],
+                    'price': book['itemPrice'],
+                    'book_url': book['itemUrl'],
+                    'salesDate': book['salesDate'],
+                    'book_contents': book['itemCaption'], 
+                    'publisherName': book['publisherName'],
+                    'book_image_url': book['largeImageUrl'], 
+                    }
+
+            )
+        book_list = Book.objects.all().order_by('-id')
+
         
-    context = {
-            'page_obj': book_information_list,
-    }
-   
-    return render(request, 'book/categorize_by_category.html' ,context)
 
-
+        return book_list
 
 
 class DetailBooKView(object):
@@ -325,26 +254,11 @@ class DetailBooKView(object):
         
     
 
-    def get_book_detail_date_with_rakuten_API(self):
+    def get_book_detail_date(self):
         object_list = Book.objects.filter(title__icontains=self.book_title)
-        book_information_list = []
-        for item in object_list:
-            paramas = {
-                'applicationId': APP_ID,
-                'format': 'json',
-                'title': item.title,
-            }
-    
-
-        response = requests.get(REQUEST_URL, paramas).json()['Items'][0]['Item']
-
-        for key in list(response):
-            if not key in ['author', 'itemCaption', 'title', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
-                del response[key]
-
-        book_information_list.append(response)
         
-        return book_information_list
+        
+        return object_list
 
     def get_youtube_video_url(self):
         youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=DEVELOPER_KEY)
@@ -353,8 +267,7 @@ class DetailBooKView(object):
 
         search_response = youtube.search().list(
             part="snippet",
-            order="viewCount",
-            maxResults=20,
+            maxResults=5,
             q=self.book_title,
         )
         
@@ -363,20 +276,13 @@ class DetailBooKView(object):
         
 
         for search_result in search_response:
-            if self.book_title in search_result['snippet']['title']:
 
-                youtube_title = search_result['snippet']['title']
+            youtube_title = search_result['snippet']['title']
 
-                youtube_video_id = search_result['id']['videoId']
-                youtube_video_url = f'https://www.youtube.com/watch?v={youtube_video_id}'
+            youtube_video_id = search_result['id']['videoId']
+            youtube_video_url = f'https://www.youtube.com/watch?v={youtube_video_id}'
 
-                youtube_video_url_dict[youtube_title] = youtube_video_url
-     
-            else:
-                pass
-
-            if len(youtube_video_url_dict) == 5:
-                break
+            youtube_video_url_dict[youtube_title] = youtube_video_url
         
         return youtube_video_url_dict
 
@@ -425,7 +331,6 @@ class DetailBooKView(object):
         
         
 
-        
 
 
     

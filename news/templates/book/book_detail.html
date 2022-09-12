@@ -9,11 +9,10 @@
 {% block content %}
 
     <div class="p-4 m-4 bg-light border border-success rounded">
-        {% for item in page_obj %}
-        {% access_list page_obj forloop.counter0 as book_obj %}
+        {% for book_obj in page_obj %}
             <h2 class="text-success">{{ book_obj.title }}</h2>
             <br>
-            <a href=""><img src="{{ book_obj.largeImageUrl }}" class="img-thumbnail"></a>
+            <a href=""><img src="{{ book_obj.book_image_url }}" class="img-thumbnail"></a>
             <br>
             <br>
             <h6>著者</h6>
@@ -22,11 +21,11 @@
             <br>
             <h6>価格</h6>
             <hr>
-            <p style="margin-left: 5px;">￥{{ book_obj.itemPrice}}</p>
+            <p style="margin-left: 5px;">￥{{ book_obj.price}}</p>
             <br>
             <h6>内容</h6>
             <hr>
-            <p style="margin-left: 5px;">{{ book_obj.itemCaption}}</p>
+            <p style="margin-left: 5px;">{{ book_obj.book_contents}}</p>
             <br>
             <h6>出版社</h6>
             <hr>
@@ -38,11 +37,15 @@
             <br>
             <h6>書籍購入</h6>
             <hr>
-            <a href="{{ book_obj.itemUrl }}"><img src="{% static 'image/楽天.jpg' %}" style="width: 100px; height: 50px"></a>
+            <a href="{{ book_obj.book_url }}"><img src="{% static 'image/楽天.jpg' %}" style="width: 100px; height: 55px"></a>
+            <a href="https://www.amazon.co.jp/?&tag=hydraamazonav-22&ref=pd_sl_7ibq2d37on_e&adgrpid=56100363354&hvpone=&hvptwo=&hvadid=592007363477&hvpos=&hvnetw=g&hvrand=12297889841017896830&hvqmt=e&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1009552&hvtargid=kwd-10573980&hydadcr=27922_14541005&gclid=Cj0KCQjwjvaYBhDlARIsAO8PkE1HwEE9tEvPqUhl2qtwplY8-vQGr9hfhBzLSz1ptbEk7FjDy1xzLc0aAkLQEALw_wcB"><img src="{% static 'image/amazon.jpg' %}" style="width: 100px; height: 55px" ></a>
+            <a href="https://jp.mercari.com/"><img src="{% static 'image/mercari.jpg' %}" style="width: 100px; height: 60px" ></a>
+            <a href="https://auctions.yahoo.co.jp/?cpt_s=onlineads&cpt_m=websem&cpt_c=webgkt&cpt_n=17470362622_aud-303767875568:kwd-10755383427_615399667164&gclid=Cj0KCQjwjvaYBhDlARIsAO8PkE0gWZv4PIFYfdcqoyZQIEI_0-37_lIhY3y3ptsewHDbok_Vi6DfQNgaAhc1EALw_wcB"><img src="{% static 'image/ヤフオク.jpg' %}" style="width: 100px; height: 60px" ></a>
+            <a href="https://paypayfleamarket.yahoo.co.jp/"><img src="{% static 'image/PayPayフリマ.png' %}" style="width: 200px; height: 60px"></a>
             <br>
             <br>
         {% endfor %}
-        <h6>{{ book_title }} の要約動画</h6>
+        <h6>{{ book_title }}でYouTube検索</h6>
         <hr>
         {% if not youtube_video_url_dict %}
             <h6 style="color:gray; margin-left: 5px;">{{ book_title }}にあてはまる動画はありません。</h6>
