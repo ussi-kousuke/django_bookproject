@@ -66,6 +66,10 @@ $ python manage.py shell
 >>> get_random_secret_key()
 'xxx-xxxx'
 ```
+
+#### API_IDを生成  
+[API詳細 楽天ブックス書籍検索API ](version:2017-04-04)(https://webservice.rakuten.co.jp/documentation/books-book-search)
+
 #### YOUTUBE_DATE_API_IDを生成  
 [YouTube Data API v3 を使って YouTube 動画を検索する](https://qiita.com/koki_develop/items/4cd7de3898dae2c33f20)
 
