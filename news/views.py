@@ -206,40 +206,46 @@ def Categorize_by_computer_and_IT(request):
 class IndexView(object):
 
     def get_book_top_page_date(self):
-        object_list = Book.objects.filter(author__isnull=True)
-   
-        book_information_list = []
-        book_title = []
-        for item in object_list:
-            paramas = {
-            'applicationId': APP_ID,
-            'format': 'json',
-            'title': item.title,
-        }
-            book_title.append(item)
-            response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
+        if Book.objects.filter(author__isnull=True).exists():
+            object_list = Book.objects.filter(author__isnull=True)
+    
+            book_information_list = []
+            book_title = []
+            for object in object_list:
+                paramas = {
+                'applicationId': APP_ID,
+                'format': 'json',
+                'title': object.title,
+            }
+                book_title.append(object)
+                response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
+                if response['title'] != object.title:
+                                delete_object = Book.objects.filter(title__icontains=object.title).delete()
+                                # messages.error(self.request, '登録した書籍に誤りがありました。正しい書籍タイトルで登録してください！！')
+                                continue
 
-            for key in list(response):
-                if not key in ['author', 'itemCaption', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
-                    del response[key]
+                for key in list(response):
+                    if not key in ['author', 'itemCaption', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
+                        del response[key]
 
-            
-            book_information_list.append(response)
-        for index, book in enumerate(book_information_list):
-            obj, created = Book.objects.update_or_create(
+                
+                book_information_list.append(response)
+            for index, book in enumerate(book_information_list):
+                obj, created = Book.objects.update_or_create(
 
-                title=book_title[index],
-                defaults={
-                    'author': book['author'],
-                    'price': book['itemPrice'],
-                    'book_url': book['itemUrl'],
-                    'salesDate': book['salesDate'],
-                    'book_contents': book['itemCaption'], 
-                    'publisherName': book['publisherName'],
-                    'book_image_url': book['largeImageUrl'], 
-                    }
+                    title=book_title[index],
+                    defaults={
+                        'author': book['author'],
+                        'price': book['itemPrice'],
+                        'book_url': book['itemUrl'],
+                        'salesDate': book['salesDate'],
+                        'book_contents': book['itemCaption'], 
+                        'publisherName': book['publisherName'],
+                        'book_image_url': book['largeImageUrl'], 
+                        }
 
-            )
+                )
+
         book_list = Book.objects.all().order_by('-id')
 
         
