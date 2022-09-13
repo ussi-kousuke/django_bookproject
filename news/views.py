@@ -139,10 +139,6 @@ def Search_Book(request):
 
     return render(request, 'book/book_search.html', context)
 
-def Classify_registerd_books_by_user(request):
-    # if request.user.is_authenticated:
-    #     user = request.user
-    pass
         
     
 def Categorize_by_business(request):
@@ -221,7 +217,6 @@ class IndexView(object):
                 response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
                 if response['title'] != object.title:
                                 delete_object = Book.objects.filter(title__icontains=object.title).delete()
-                                # messages.error(self.request, '登録した書籍に誤りがありました。正しい書籍タイトルで登録してください！！')
                                 continue
 
                 for key in list(response):
