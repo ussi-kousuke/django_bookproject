@@ -1,0 +1,1 @@
+"web: gunicorn django_bookproject.wsgi --log-file -"
