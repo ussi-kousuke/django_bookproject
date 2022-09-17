@@ -5,3 +5,7 @@
 .env
 
 __pycache__
+
+local.settings.py
+
+db.sqlite3
