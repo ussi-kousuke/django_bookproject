@@ -1,1 +1,1 @@
-"web: gunicorn django_bookproject.wsgi --log-file -"
+"web: gunicorn mysite.wsgi --log-file -"
