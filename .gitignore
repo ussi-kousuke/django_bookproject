@@ -1,11 +1,16 @@
+__pycache__/
+
+
 #仮想環境は除外
 /venv/
+
+
+local.settings.py
+
+staticfiles
 
 #環境変数は除外
 .env
 
-__pycache__
-
-local.settings.py
-
 db.sqlite3
+

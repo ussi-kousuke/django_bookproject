@@ -29,11 +29,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY', str)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['django-bookproject-portfolio.herokuapp.com']
-
-
+ALLOWED_HOSTS = ['127.0.0.1']
+# django-bookproject-portfolio.herokuapp.com
+'127.0.0.1' 
 # Application definition
 
 INSTALLED_APPS = [
@@ -144,6 +144,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'index'
 
 LOGOUT_REDIRECT_URL = 'index'
+
 
 import dj_database_url
 db_from_env = dj_database_url.config()

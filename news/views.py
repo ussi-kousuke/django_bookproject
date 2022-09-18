@@ -34,7 +34,7 @@ CUSTOM_SEARCH_ENGINE_ID = env('CUSTOM_SEARCH_ENGINE_ID', str)
 
 def index_view(request):
     indexview = IndexView()
-    book_list = indexview.get_book_top_page_date()
+    book_list = indexview.get_book_top_page_date(request)
     paginator = Paginator(book_list, ITEM_PER_PAGE)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -201,7 +201,7 @@ def Categorize_by_computer_and_IT(request):
 
 class IndexView(object):
 
-    def get_book_top_page_date(self):
+    def get_book_top_page_date(self, request):
         if Book.objects.filter(author__isnull=True).exists():
             object_list = Book.objects.filter(author__isnull=True)
     
@@ -214,16 +214,22 @@ class IndexView(object):
                 'title': object.title,
             }
                 book_title.append(object)
-                response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
+                try:
+                    response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
+                except Exception:
+                    delete_object = Book.objects.filter(title__icontains=object.title).delete()
+                    messages.error(request, f'{object.title} は登録することができない書籍です。')
+                    continue
+                   
                 if response['title'] != object.title:
                                 delete_object = Book.objects.filter(title__icontains=object.title).delete()
+                                messages.error(request, f'{object.title} の書籍は見つかりませんでした。書籍のタイトルは誤字・脱字がないように登録してください。')
                                 continue
 
                 for key in list(response):
                     if not key in ['author', 'itemCaption', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
                         del response[key]
-
-                
+  
                 book_information_list.append(response)
             for index, book in enumerate(book_information_list):
                 obj, created = Book.objects.update_or_create(

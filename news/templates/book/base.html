@@ -73,11 +73,9 @@
         </header>
         
         {% if messages %}
-          <ul class="messages">
+          <ul class="messages_ul">
             {% for message in messages %}
-              <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                {{ message }}
-              </li>
+              <li class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</li>
             {% endfor %}
           </ul>
         {% endif %}
