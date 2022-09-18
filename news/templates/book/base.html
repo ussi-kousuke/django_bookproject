@@ -42,6 +42,7 @@
                           <a class="nav-link" href="{% url 'accounts:logout' %}">ログアウト</a>
                         {% else %}
                           <a class="nav-link" href="{% url 'accounts:login' %}">ログイン</a>
+                          <br>
                           <a class="nav-link" href="{% url 'accounts:signup'%}">会員登録</a>
                         {% endif %}
                     </div>
