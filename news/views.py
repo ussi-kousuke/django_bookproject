@@ -221,10 +221,6 @@ class IndexView(object):
                     messages.error(request, f'{object.title} は登録することができない書籍です。')
                     continue
                    
-                if response['title'] != object.title:
-                                delete_object = Book.objects.filter(title__icontains=object.title).delete()
-                                messages.error(request, f'{object.title} の書籍は見つかりませんでした。書籍のタイトルは誤字・脱字がないように登録してください。')
-                                continue
 
                 for key in list(response):
                     if not key in ['author', 'itemCaption', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
