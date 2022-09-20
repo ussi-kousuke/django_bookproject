@@ -281,8 +281,10 @@ class DetailBooKView(object):
         for search_result in search_response:
 
             youtube_title = search_result['snippet']['title']
-
-            youtube_video_id = search_result['id']['videoId']
+            try:
+                youtube_video_id = search_result['id']['videoId']
+            except KeyError:
+                pass
             youtube_video_url = f'https://www.youtube.com/watch?v={youtube_video_id}'
 
             youtube_video_url_dict[youtube_title] = youtube_video_url
