@@ -56,6 +56,7 @@ def detail_book_view(request, book_title):
     book_information_list = detailbookview.get_book_detail_date()
     youtube_video_url_dict = detailbookview.get_youtube_video_url()
     Google_search_result_date_url = detailbookview.get_Google_search_result_date_url()
+    Twitter_url_to_search = detailbookview.get_Twitter_url_date_to_search()
     review_book_list = detailbookview.get_review_book_date()
    
 
@@ -64,6 +65,7 @@ def detail_book_view(request, book_title):
         'book_title':book_title,
         'youtube_video_url_dict': youtube_video_url_dict,
         'Google_search_result_date_url': Google_search_result_date_url,
+        'Twitter_url_to_search': Twitter_url_to_search,
         'review_book_list': review_book_list,
         
     }
@@ -318,6 +320,11 @@ class DetailBooKView(object):
 
 
         return Google_search_result_date_url
+
+    def get_Twitter_url_date_to_search(self):
+        Twitter_url_to_search = f'https://twitter.com/search?q={self.book_title}&src=typed_query'
+        return Twitter_url_to_search
+
     
     def get_book_primary_key(self):
         
