@@ -225,7 +225,7 @@ class IndexView(object):
                    
 
                 for key in list(response):
-                    if not key in ['author', 'itemCaption', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
+                    if not key in ['title', 'author', 'itemCaption', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
                         del response[key]
   
                 book_information_list.append(response)
@@ -234,6 +234,7 @@ class IndexView(object):
 
                     title=book_title[index],
                     defaults={
+                        'title': book['title'],
                         'author': book['author'],
                         'price': book['itemPrice'],
                         'book_url': book['itemUrl'],
@@ -341,6 +342,7 @@ class DetailBooKView(object):
         return review_book_list
         
         
+    
         
 
 
