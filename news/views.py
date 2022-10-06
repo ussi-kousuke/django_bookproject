@@ -106,7 +106,6 @@ class CreateReviewView(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['book'] = Book.objects.filter(title__icontains=self.kwargs['book_review_title'])
-        print(context)
         return context
     
     def form_valid(self, form):

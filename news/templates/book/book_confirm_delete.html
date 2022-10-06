@@ -1,11 +1,50 @@
-{% extends 'base.html' %}
+{% extends 'book/base.html' %}
 
-{% block title %} 書籍削除 {% endblock title %}  
-
-{% block content %}
-    <h1>書籍削除</h1>
-    <form method='post'>{% csrf_token %}
-        <button type="submit">{{ object.title }}を削除する</button>
+{% block title %}レビュー投稿{% endblock %}
+{% block h1%} レビュー投稿{% endblock %}
+{%block content%}
+    
+    <form method="post" class="p-4 m-4 bg-light border border-success rounded form-group">
+    {% csrf_token %}
+    {% for item in book %}
+        <table>
+            <tr>
+                <th>
+                    <label>対象書籍</label>
+                </th>
+                <th>
+                    <input class="form-contorl" value="{{ item.title }}" readonly>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <label>
+                        タイトル
+                    </label>
+                </th>
+                <th>
+                    <input class="form-contorol" name="title">
+                </th>
+            </tr>
+        </table>
+        <label>
+            本文
+        </label>
+        <textarea class="form-control" name="text" rows="3"></textarea>
+        <label>
+            星の数
+        </label>
+        <select class="form-control" name="rate">
+            <option value="0">0 (最低)</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3" selected>3 (普通)</option>
+            <option value="4">4</option>
+            <option value="5">5 (最高)</option>
+        </select>
+        <input type="hidden" name="book" value="{{ item.id }}">
+        <button type="submit" class="btn btn-success mt-4">投稿する</button>
+    {% endfor %}
     </form>
 
-{% endblock  %}
+{% endblock %}
