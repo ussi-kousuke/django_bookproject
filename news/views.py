@@ -54,7 +54,15 @@ def detail_book_view(request, book_title):
 
     detailbookview = DetailBooKView(book_title)
     book_information_list = detailbookview.get_book_detail_date()
-    youtube_video_url_dict = detailbookview.get_youtube_video_url()
+    
+    try:
+        youtube_video_url_dict = detailbookview.get_youtube_video_url()
+    except UnboundLocalError:
+        pass
+
+    except KeyError:
+        pass
+        
     Google_search_result_date_url = detailbookview.get_Google_search_result_date_url()
     Twitter_url_to_search = detailbookview.get_Twitter_url_date_to_search()
     review_book_list = detailbookview.get_review_book_date()
@@ -283,22 +291,22 @@ class DetailBooKView(object):
         for search_result in search_response:
 
             youtube_title = search_result['snippet']['title']
-            try:
-                youtube_video_id = search_result['id']['videoId']
+            # try:
+            youtube_video_id = search_result['id']['videoId']
 
-            except UnboundLocalError:
-                pass
+            # except UnboundLocalError:
+            #     pass
 
-            except KeyError:
-                pass
-            try:
-                youtube_video_url = f'https://www.youtube.com/watch?v={youtube_video_id}'
-                
-            except UnboundLocalError:
-                pass
+            # except KeyError:
+            #     pass
+            # try:
+            youtube_video_url = f'https://www.youtube.com/watch?v={youtube_video_id}'
 
-            except KeyError:
-                pass
+            # except UnboundLocalError:
+            #     pass
+
+            # except KeyError:
+            #     pass
 
             youtube_video_url_dict[youtube_title] = youtube_video_url
         
