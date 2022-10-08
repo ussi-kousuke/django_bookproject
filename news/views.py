@@ -285,7 +285,10 @@ class DetailBooKView(object):
             youtube_title = search_result['snippet']['title']
             try:
                 youtube_video_id = search_result['id']['videoId']
+
             except UnboundLocalError:
+                pass
+            except KeyError:
                 pass
             youtube_video_url = f'https://www.youtube.com/watch?v={youtube_video_id}'
 
