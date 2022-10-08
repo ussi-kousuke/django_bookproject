@@ -54,7 +54,7 @@ def detail_book_view(request, book_title):
 
     detailbookview = DetailBooKView(book_title)
     book_information_list = detailbookview.get_book_detail_date()
-    
+
     try:
         youtube_video_url_dict = detailbookview.get_youtube_video_url()
     except UnboundLocalError:
@@ -307,9 +307,11 @@ class DetailBooKView(object):
 
             # except KeyError:
             #     pass
-
-            youtube_video_url_dict[youtube_title] = youtube_video_url
-        
+            try:
+                youtube_video_url_dict[youtube_title] = youtube_video_url
+            except UnboundLocalError:
+                pass
+                
         return youtube_video_url_dict
 
     def get_Google_search_result_date_url(self):
