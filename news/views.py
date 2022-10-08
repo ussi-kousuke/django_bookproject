@@ -186,16 +186,16 @@ def Categorize_by_Humanities_and_ideas(request):
     return render(request, 'book/categorize_by_category.html' ,context)
 
 def Categorize_by_computer_and_IT(request):
-    
+  
     object_list = Book.objects.filter(category='computer・IT')
     paginator = Paginator(object_list, ITEM_PER_PAGE)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-
+    
     context = {
         'page_obj': page_obj,
     }
-   
+    
     
     return render(request, 'book/categorize_by_category.html' ,context)
 
@@ -285,7 +285,7 @@ class DetailBooKView(object):
             youtube_title = search_result['snippet']['title']
             try:
                 youtube_video_id = search_result['id']['videoId']
-            except KeyError:
+            except UnboundLocalError:
                 pass
             youtube_video_url = f'https://www.youtube.com/watch?v={youtube_video_id}'
 
