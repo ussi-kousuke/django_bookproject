@@ -58,10 +58,10 @@ def detail_book_view(request, book_title):
     try:
         youtube_video_url_dict = detailbookview.get_youtube_video_url()
     except UnboundLocalError:
-        pass
+        youtube_video_url_dict.clear()
 
     except KeyError:
-        pass
+        youtube_video_url_dict.clear()
         
     Google_search_result_date_url = detailbookview.get_Google_search_result_date_url()
     Twitter_url_to_search = detailbookview.get_Twitter_url_date_to_search()
@@ -71,7 +71,7 @@ def detail_book_view(request, book_title):
     context = {
         'page_obj': book_information_list,
         'book_title':book_title,
-        'youtube_video_url_dict': youtube_video_url_dict,
+        'youtube_video_url_dict': youtube_video_url_dict,  
         'Google_search_result_date_url': Google_search_result_date_url,
         'Twitter_url_to_search': Twitter_url_to_search,
         'review_book_list': review_book_list,
