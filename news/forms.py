@@ -11,5 +11,8 @@ class BookForm(forms.ModelForm):
                 'category': 'カテゴリ :'
 
             }
+            widgets = {
+                'title': forms.TextInput(attrs={'placeholder':'書籍のタイトルを入力'}),
+            }
 
 
