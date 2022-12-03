@@ -53,7 +53,7 @@ def index_view(request):
 def detail_book_view(request, book_title):
 
     detailbookview = DetailBooKView(book_title)
-    book_information_list = detailbookview.get_book_detail_date()
+    book_information_list = detailbookview.get_detail_book_date()
 
     try:
         youtube_video_url_dict = detailbookview.get_youtube_video_url()
@@ -279,7 +279,7 @@ class DetailBooKView(object):
         
     
 
-    def get_book_detail_date(self):
+    def get_detail_book_date(self):
         object_list = Book.objects.filter(title__icontains=self.book_title)
         
         
