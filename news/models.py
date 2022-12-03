@@ -9,7 +9,7 @@ CATEGORY = (('business', 'ビジネス'), ('science ・Technology', '科学・�
 RATE_CHOICES = [(x, str(x))for x in range(0, MAX_RATE + 1)]
 
 class Book(models.Model):
-    title = models.CharField(max_length=100, unique=True)
+    title = models.CharField(max_length=100)
     author = models.CharField(max_length=200, null=True)
     price = models.IntegerField(null=True)
     book_url = models.URLField(null=True)
@@ -17,6 +17,7 @@ class Book(models.Model):
     book_contents = models.CharField(max_length=5000, null=True)
     publisherName = models.CharField(max_length=100, null=True)
     salesDate = models.CharField(max_length=100, null=True)
+    subtitle = models.CharField(max_length=1000, null=True)
     category = models.CharField(
         max_length = 100,
         choices = CATEGORY

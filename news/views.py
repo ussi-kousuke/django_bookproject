@@ -34,7 +34,7 @@ CUSTOM_SEARCH_ENGINE_ID = env('CUSTOM_SEARCH_ENGINE_ID', str)
 
 def index_view(request):
     indexview = IndexView()
-    book_list = indexview.get_book_top_page_date(request)
+    book_list = indexview.get_top_page_book_date(request)
     paginator = Paginator(book_list, ITEM_PER_PAGE)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -210,7 +210,7 @@ def Categorize_by_computer_and_IT(request):
 
 class IndexView(object):
 
-    def get_book_top_page_date(self, request):
+    def get_top_page_book_date(self, request):
         if Book.objects.filter(author__isnull=True).exists():
             object_list = Book.objects.filter(author__isnull=True)
     
@@ -222,36 +222,48 @@ class IndexView(object):
                 'format': 'json',
                 'title': object.title,
             }
-                book_title.append(object)
+                book_title.append(object.title)
                 try:
                     response = requests.get(REQUEST_URL, paramas).json()["Items"][0]['Item']
                 except Exception:
-                    delete_object = Book.objects.filter(title__icontains=object.title).delete()
+                    object_list.delete()
                     messages.error(request, f'{object.title} は登録することができない書籍です。')
                     continue
-                   
+                
+                if Book.objects.filter(title__icontains=response['title'] ,author__icontains=response['author']).exists():
+                    object_list.delete()
+                    messages.error(request, f'{object.title} はすでに登録されている書籍です。')
+                    continue
 
                 for key in list(response):
-                    if not key in ['title', 'author', 'itemCaption', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate']:
+                    if not key in ['title', 'author', 'itemCaption', 'itemPrice', 'itemUrl', 'largeImageUrl', 'publisherName',  'salesDate', 'subTitle']:
                         del response[key]
   
                 book_information_list.append(response)
+
+
+        
             for index, book in enumerate(book_information_list):
+
                 obj, created = Book.objects.update_or_create(
 
-                    title=book_title[index],
-                    defaults={
-                        'title': book['title'],
-                        'author': book['author'],
-                        'price': book['itemPrice'],
-                        'book_url': book['itemUrl'],
-                        'salesDate': book['salesDate'],
-                        'book_contents': book['itemCaption'], 
-                        'publisherName': book['publisherName'],
-                        'book_image_url': book['largeImageUrl'], 
-                        }
+                title=book_title[index],
+                defaults={
+                    'title': book['title'],
+                    'author': book['author'],
+                    'price': book['itemPrice'],
+                    'book_url': book['itemUrl'],
+                    'salesDate': book['salesDate'],
+                    'book_contents': book['itemCaption'], 
+                    'publisherName': book['publisherName'],
+                    'book_image_url': book['largeImageUrl'], 
+                    'subtitle': book['subTitle']
+                    }
 
                 )
+
+
+                
 
         book_list = Book.objects.all().order_by('-id')
 
