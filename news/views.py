@@ -68,7 +68,7 @@ def detail_book_view(request, book_title):
     note_url_to_search = detailbookview.get_note_url_date_to_search()
     review_book_list = detailbookview.get_review_book_date()
     
-    print(note_url_to_search)
+    
     context = {
         'page_obj': book_information_list,
         'book_title':book_title,
