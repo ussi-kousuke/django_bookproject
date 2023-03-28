@@ -65,20 +65,21 @@ def detail_book_view(request, book_title):
         
     Google_search_result_date_url = detailbookview.get_Google_search_result_date_url()
     Twitter_url_to_search = detailbookview.get_Twitter_url_date_to_search()
+    note_url_to_search = detailbookview.get_note_url_date_to_search()
     review_book_list = detailbookview.get_review_book_date()
-   
-
+    
+    print(note_url_to_search)
     context = {
         'page_obj': book_information_list,
         'book_title':book_title,
         'youtube_video_url_dict': youtube_video_url_dict,  
         'Google_search_result_date_url': Google_search_result_date_url,
         'Twitter_url_to_search': Twitter_url_to_search,
+        'note_url_to_search' : note_url_to_search,
         'review_book_list': review_book_list,
         
     }
-    
-    
+     
     return render(request, 'book/book_detail.html', context)
 
 
@@ -358,7 +359,12 @@ class DetailBooKView(object):
         Twitter_url_to_search = f'https://twitter.com/search?q={self.book_title}&src=typed_query'
         return Twitter_url_to_search
 
+
+    def get_note_url_date_to_search(self):
+        note_url_to_search = f'https://note.com/search?q={self.book_title}&context=note&mode=search'
+        return note_url_to_search
     
+
     def get_book_primary_key(self):
         
         object_list = Book.objects.filter(title__icontains=self.book_title)
